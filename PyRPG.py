@@ -1,25 +1,6 @@
-#    Import Libraries    #
-from enum import Enum
-
-#    Character Classes    #
-class CharacterClass(enum):
-    Fighter = ("Fighter", {
-        "Strength" : 10, 
-        "Dexterity" : 5, 
-        "Intelligence" : 0, 
-        "Vitality" : 5
-    })
-    Archer = ("Archer", {
-        "Strength" : 5,
-        "Dexterity" : 10,
-        "Intelligence" : 5,
-        "Vitality" : 0
-    })
-
 #    Character Stats    #
 
-
-class character:
+class Character:
     Stats = {
         "Strength" : 5,
         "Dexterity" : 5,
@@ -31,9 +12,30 @@ class character:
 
 
 
+class Fighter(Character):
+    Stats = {
+        "Strength" : 10, 
+        "Dexterity" : 6,
+        "Intelligence" : 4,
+        "Vitality" : 8}
+
+class Archer(Character):
+    Stats = {
+        "Strength" : 8, 
+        "Dexterity" : 10,
+        "Intelligence" : 4,
+        "Vitality" : 6}
+
+class Mage(Character):
+    Stats = {
+        "Strength" : 4, 
+        "Dexterity" : 6,
+        "Intelligence" : 10,
+        "Vitality" : 8}
 
 
 def InitializeCharacter():
-    Classes = list(CharacterClass)
     playerName = str(input("What is the name of your Character? \n"))
-    playerClass = str(input("What class is your character [".join(Classes),"]"))
+    return playerName
+
+print(InitializeCharacter())
