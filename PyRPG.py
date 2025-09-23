@@ -1,6 +1,6 @@
 #    Character Stats    #
 
-class Character:
+'''class Character:
     Stats = {
         "Strength" : 5,
         "Dexterity" : 5,
@@ -31,11 +31,11 @@ class Mage(Character):
         "Strength" : 4, 
         "Dexterity" : 6,
         "Intelligence" : 10,
-        "Vitality" : 8}
+        "Vitality" : 8}'''
 
 
 def InitializeCharacter():
-    playerName = str(input("What is the name of your Character? \n"))
+    playerName = str(input("What is the name of your Character?\n"))
     return playerName
 
 print(InitializeCharacter())
