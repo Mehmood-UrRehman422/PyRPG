@@ -6,8 +6,8 @@ import tkinter as tk # For Grapical User Interfaces
 
 
 #    Character Stats    #
-
 class Character:
+    #    Initialize Character Class    #
     def __init__(self, name, inventory, chosenClass, baseStats):
         #    Name is the Character Name    #
         self.name = name
@@ -50,45 +50,28 @@ def InitializeGame():
         global CharacterClasses # Make Character Classes accessible throughout the script
         CharacterClasses = list(csv.reader(file)) # Save all the Character Classes from the CSV file into a list
     
+    playerName = str(input("What is your character's name?\n------------------------------\n")).capitalize() # Make the character pick a name for their player
+
     def PickCharacterClass():   #IMPORTANT: Could potentially move this either entirely into the Character Class or into a CSV File and read from a table
+        
+        availableClasses = []
+        for row in CharacterClasses[1:]:
+            availableClasses.append(row[0])
+        
         global characterClass # Make characterClass accessible by whole script
-        characterClass = str(input("\nWhat Character Class do you want your character to be? [Fighter, Archer, Mage]\n"))
-
-
-        #########################if characterClass.Lower() != 
-        match characterClass.Lower():
-            case "fighter":
-                Stats = {
-                    "Strength" : 10, 
-                    "Dexterity" : 6,
-                    "Intelligence" : 4,
-                    "Vitality" : 8}
-                return Stats
-            case "archer":
-                Stats = {
-                    "Strength" : 8, 
-                    "Dexterity" : 10,
-                    "Intelligence" : 4,
-                    "Vitality" : 6}
-                return Stats
-            case "mage":
-                Stats = {
-                    "Strength" : 4, 
-                    "Dexterity" : 8,
-                    "Intelligence" : 10,
-                    "Vitality" : 6}
-                return Stats
-            case _: # This happens if it is none of the cases above (similar to Else statement)
-                print("This is not a valid Character Class, Please pick again")
-                return PickCharacterClass()
-
-    playerName = str(input("What is your character's name?\n------------------------------\n")) # Make the character pick a name for their player
-
-    classStats = PickCharacterClass() # Make the player choose a Character Class
-
-    global Player # Make the Player accessible by the whole script
-    Player = Character(name=playerName, health=100, inventory=[], chosenClass=characterClass, baseStats=classStats) # Create a Player Object, that derives from the Character class
-
+        characterClass = str(input("\nWhat Character Class do you want your character to be? [" + ", ".join(availableClasses) + "]\n")) # Join up the classes into a string and ask the player what they want to be
+        if characterClass.capitalize() in availableClasses: # convert both to lowercase and find if user chosen class exists in availableClasses
+            print("Class found")
+            classStats = availableClasses.index(characterClass.capitalize())
+            classStats = CharacterClasses[classStats+1]
+            print(classStats)
+            classStats = {"Strength":int(classStats[1]), "Dexterity":int(classStats[2]), "Intelligence":int(classStats[3]), "Vitality":int(classStats[4])}
+            global Player # Make the Player accessible by the whole script
+            Player = Character(name=playerName, inventory=[], chosenClass=characterClass, baseStats=classStats) # Create a Player Object, that derives from the Character class
+        else:
+            print("Class not found")
+    
+    PickCharacterClass()
     time.sleep(1) # Gives the user a moment to process what is on screen
 
     print("Good Luck, " + Player.name + "!" + "\n\n")
