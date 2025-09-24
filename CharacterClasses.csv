@@ -1,0 +1,4 @@
+Class,Strength,Dexterity,Intelligence,Vitality,Starter Equipment
+Fighter,10,6,4,8,[]
+Archer,8,10,4,6,[]
+Mage,4,8,10,6,[]

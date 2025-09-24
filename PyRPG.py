@@ -1,6 +1,9 @@
 #    Import Libraries    #
 import time # For delays
+import csv # For Data Tables
 import json # For saving/Loading
+import tkinter as tk # For Grapical User Interfaces
+
 
 #    Character Stats    #
 
@@ -42,9 +45,17 @@ class Character:
 #    Includes Class selection and Name selection    #
 def InitializeGame():
 
+    #    Read and Save data table elements for later    #
+    with open('CharacterClasses.csv', mode = 'r') as file: # With handles automatic opening and closing of files, 'R' is for Read Mode
+        global CharacterClasses # Make Character Classes accessible throughout the script
+        CharacterClasses = list(csv.reader(file)) # Save all the Character Classes from the CSV file into a list
+    
     def PickCharacterClass():   #IMPORTANT: Could potentially move this either entirely into the Character Class or into a CSV File and read from a table
         global characterClass # Make characterClass accessible by whole script
         characterClass = str(input("\nWhat Character Class do you want your character to be? [Fighter, Archer, Mage]\n"))
+
+
+        #########################if characterClass.Lower() != 
         match characterClass.Lower():
             case "fighter":
                 Stats = {
