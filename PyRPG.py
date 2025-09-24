@@ -39,10 +39,7 @@ class Character:
         print("Intelligence:",str(self.intelligence))
         print("Vitality:",str(self.vitality))
 
-
-
 #    Function to initialize the game    #
-#    Includes Class selection and Name selection    #
 def InitializeGame():
 
     #    Read and Save data table elements for later    #
@@ -79,11 +76,8 @@ def InitializeGame():
     global isPlaying # Make an isPlaying Variable that is accessible by the whole script
     isPlaying=True # Set the isPlaying Boolean to True
 
-
-
 InitializeGame() # Call the initializer function to gain appropriate data for the game
 Player.showStats() # Show the player stats on screen
-
 
 #    Game Loop    #
 while(isPlaying):
