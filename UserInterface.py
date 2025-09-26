@@ -64,8 +64,19 @@ def NewGame():
     Btn_Back = tk.Button(rootFrame, text="Back", command=GameLoadMenu)
     Btn_Back.pack(side=tk.TOP, anchor=tk.NW)
 
-    Ent_PlayerName = tk.Entry()
+    tk.Label(rootFrame, text="Enter Character Name:").pack()
+    
+    def SubmitName():
+        CharacterName = Str_Name.get()
+        print("Character name is", CharacterName)
+
+    Str_Name = tk.StringVar()
+    
+    Ent_PlayerName = tk.Entry(rootFrame, textvariable=Str_Name)
     Ent_PlayerName.pack()
+
+    Btn_Submit = tk.Button(rootFrame, text="Next", command=SubmitName)
+    Btn_Submit.pack(side=tk.BOTTOM, padx=20, pady=20)
 
     #rootWin.state("zoomed")
     #FullscreenToggle()
