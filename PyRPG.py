@@ -2,31 +2,11 @@
 import time # For delays
 import csv # For Data Tables
 import json # For saving/Loading
-import tkinter as tk # For Grapical User Interfaces
 from character import Character
-#from tkinter import *
-
-rootWin = tk.Tk()
-rootWin.title("PyRPG")
-rootWin.config(bg="dark slate grey")
-rootWin.resizable(False, False)
-
-rootFrame = tk.Frame(rootWin, width=400, height=80)
-rootFrame.pack(padx=20, pady=20)
-rootFrame.pack_propagate(False)
-
-Btn_NewGame = tk.Button(rootFrame, text="New Game")
-Btn_NewGame.pack(fill=tk.BOTH, side=tk.LEFT, expand=True)
-
-Btn_LoadGame = tk.Button(rootFrame, text="Load Game")
-Btn_LoadGame.pack(fill=tk.BOTH, side=tk.RIGHT, expand=True)
-
-
-rootWin.mainloop()
-
-
 
 #    Function to initialize the game    #
+isPlaying = False
+
 def InitializeGame():
 
     #    Read and Save data table elements for later    #
@@ -54,6 +34,7 @@ def InitializeGame():
             Player = Character(name=playerName, inventory=[], chosenClass=characterClass, baseStats=classStats) # Create a Player Object, that derives from the Character class
         else:
             print("Class not found")
+            PickCharacterClass()
     
     PickCharacterClass()
     time.sleep(1) # Gives the user a moment to process what is on screen
@@ -63,8 +44,8 @@ def InitializeGame():
     global isPlaying # Make an isPlaying Variable that is accessible by the whole script
     isPlaying=True # Set the isPlaying Boolean to True
 
-InitializeGame() # Call the initializer function to gain appropriate data for the game
-Player.showStats() # Show the player stats on screen
+#InitializeGame() # Call the initializer function to gain appropriate data for the game
+#Player.showStats() # Show the player stats on screen
 
 #    Game Loop    #
 while(isPlaying):
