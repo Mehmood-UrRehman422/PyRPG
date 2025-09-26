@@ -3,41 +3,28 @@ import time # For delays
 import csv # For Data Tables
 import json # For saving/Loading
 import tkinter as tk # For Grapical User Interfaces
+from character import Character
+#from tkinter import *
+
+rootWin = tk.Tk()
+rootWin.title("PyRPG")
+rootWin.config(bg="dark slate grey")
+rootWin.resizable(False, False)
+
+rootFrame = tk.Frame(rootWin, width=400, height=80)
+rootFrame.pack(padx=20, pady=20)
+rootFrame.pack_propagate(False)
+
+Btn_NewGame = tk.Button(rootFrame, text="New Game")
+Btn_NewGame.pack(fill=tk.BOTH, side=tk.LEFT, expand=True)
+
+Btn_LoadGame = tk.Button(rootFrame, text="Load Game")
+Btn_LoadGame.pack(fill=tk.BOTH, side=tk.RIGHT, expand=True)
 
 
-#    Character Stats    #
-class Character:
-    #    Initialize Character Class    #
-    def __init__(self, name, inventory, chosenClass, baseStats):
-        #    Name is the Character Name    #
-        self.name = name
+rootWin.mainloop()
 
-        #    Inventory is an array of items that the player has    #
-        self.inventory = inventory
 
-        #    Chosen Class is the character class that the player has chosen    #
-        self.chosenClass = chosenClass
-
-        #    Max Health is the maximum amount of Hit Points (HP) possible for the character to have    #
-        #    Current Health is the how many Hit Points (HP) the player currently has    #
-        self.maxHealth = baseStats.get("Vitality") * 2
-        self.health = self.maxHealth
-
-        #    The Player has four stats that affect the overall efficiency/effect of the equipment and levelling    #
-        self.strength = baseStats.get("Strength")
-        self.dexterity = baseStats.get("Dexterity")
-        self.intelligence = baseStats.get("Intelligence")
-        self.vitality = baseStats.get("Vitality")
-
-    #    Show Player stats    #
-    def showStats(self):
-        print("Name: " + self.name + "\n" + "Health: " + str(self.health))
-        print("Maximum Health: " + str(self.maxHealth) + "\n")
-
-        print("Strength:",str(self.strength))
-        print("Dexterity:",str(self.dexterity))
-        print("Intelligence:",str(self.intelligence))
-        print("Vitality:",str(self.vitality))
 
 #    Function to initialize the game    #
 def InitializeGame():
@@ -48,7 +35,7 @@ def InitializeGame():
         CharacterClasses = list(csv.reader(file)) # Save all the Character Classes from the CSV file into a list
     
     playerName = str(input("What is your character's name?\n------------------------------\n")).capitalize() # Make the character pick a name for their player
-
+    
     def PickCharacterClass():   #IMPORTANT: Could potentially move this either entirely into the Character Class or into a CSV File and read from a table
         
         availableClasses = []
