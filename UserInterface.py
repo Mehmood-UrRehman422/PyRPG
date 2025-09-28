@@ -4,6 +4,8 @@ import PyRPG
 isFullscreen = False
 FullscreenToggleable = True
 
+PyRPG.InitDataTables()
+
 #    Sets fullscreen to toggleable or not    #
 def setFullscreenToggleable(state):
     global FullscreenToggleable
@@ -54,32 +56,63 @@ def GameLoadMenu():
 
 #    Opens New Character Chooser Menu    #
 def NewGame():
-    setFullscreenToggleable(True)
-    EmptyMainMenu()
-
-    rootFrame = tk.Frame(rootWin, width=400, height=320)
-    rootFrame.pack(padx=20, pady=20)
-    rootFrame.pack_propagate(False)
-
-    Btn_Back = tk.Button(rootFrame, text="Back", command=GameLoadMenu)
-    Btn_Back.pack(side=tk.TOP, anchor=tk.NW)
-
-    tk.Label(rootFrame, text="Enter Character Name:").pack()
     
-    def SubmitName():
-        CharacterName = Str_Name.get()
-        print("Character name is", CharacterName)
+    def NameChooser():
+        EmptyMainMenu() # Clear the existing menu for new information to be displayed
 
-    Str_Name = tk.StringVar()
-    
-    Ent_PlayerName = tk.Entry(rootFrame, textvariable=Str_Name)
-    Ent_PlayerName.pack()
+        #    When player presses the "Next" button, this gets the string held inside Str_Name, which is saved in the Entry Box    #
+        def SubmitName():
+            print("Character name is", Str_Name.get()) # Debug Character Name
+            classChooser(Name=Str_Name.get()) # Save CharacterName to what is held in Str_Name
+        
 
-    Btn_Submit = tk.Button(rootFrame, text="Next", command=SubmitName)
-    Btn_Submit.pack(side=tk.BOTTOM, padx=20, pady=20)
+        rootFrame = tk.Frame(rootWin, width=400, height=160) # Creates a frame
+        rootFrame.pack(padx=20, pady=20) # Pack the frame
+        rootFrame.pack_propagate(False) # Dont let the frame change size from Children
+
+        Btn_Back = tk.Button(rootFrame, text="Back", command=GameLoadMenu) # Create a back button that takes the player back to the game load menu
+        Btn_Back.pack(side=tk.TOP, anchor=tk.NW) # Attach it to the top and anchor it to the top left
+
+        tk.Label(rootFrame, text="Enter Character Name:").pack()
+
+        Str_Name = tk.StringVar()
+        
+        Ent_PlayerName = tk.Entry(rootFrame, textvariable=Str_Name)
+        Ent_PlayerName.pack()
+
+        Btn_Submit = tk.Button(rootFrame, text="Next", command=SubmitName)
+        Btn_Submit.pack(side=tk.BOTTOM, padx=20, pady=20)
+
+    def classChooser(Name):
+
+        def SubmitClass():
+            pass
+
+        EmptyMainMenu()
+
+        rootFrame = tk.Frame(rootWin, width=400, height=320)
+        rootFrame.pack(padx=20, pady=20)
+        rootFrame.pack_propagate(False)
+
+        Btn_Back = tk.Button(rootFrame, text="Back", command=NameChooser)
+        Btn_Back.pack(side=tk.TOP, anchor=tk.NW)
+
+        tk.Label(rootFrame, text="Name: "+Name).pack(side=tk.TOP)
+
+        PyRPG.CharacterClasses
+        availableClasses = []
+        for row in PyRPG.CharacterClasses[1:]:
+            availableClasses.append(row[0])
+
+        tk.OptionMenu(rootFrame, tk.StringVar(value=availableClasses[0]), *availableClasses).pack()
+
 
     #rootWin.state("zoomed")
     #FullscreenToggle()
+
+
+    setFullscreenToggleable(False) # Set FullscreenToggleable to True, Lets user toggle Fullscreen
+    NameChooser()
 
 #    Opens Load Save File Menu    #
 def LoadGame():

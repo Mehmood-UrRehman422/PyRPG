@@ -7,6 +7,13 @@ from character import Character
 #    Function to initialize the game    #
 isPlaying = False
 
+
+def InitDataTables():
+    #    Read and Save data table elements for later    #
+    with open('CharacterClasses.csv', mode = 'r') as file: # With handles automatic opening and closing of files, 'R' is for Read Mode
+        global CharacterClasses # Make Character Classes accessible throughout the script
+        CharacterClasses = list(csv.reader(file)) # Save all the Character Classes from the CSV file into a list
+
 def InitializeGame():
 
     #    Read and Save data table elements for later    #
